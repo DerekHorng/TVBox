@@ -21,8 +21,17 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Create local.properties
-        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Fix Python path and Maven mirrors
+        run: |
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+          sed -i 's|D:/Programs/Python/Python38/python.exe|python3|g' pyramid/build.gradle
+          sed -i 's|https://maven.aliyun.com/repository/public|https://maven.org|g' build.gradle settings.gradle
+          sed -i 's|https://aliyun.com|https://google.com|g' build.gradle settings.gradle
 
       - name: Build With Gradle
         run: |
