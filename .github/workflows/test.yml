@@ -21,6 +21,9 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
+      - name: Create local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
+
       - name: Build With Gradle
         run: |
           chmod +x gradlew
