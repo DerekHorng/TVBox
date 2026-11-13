@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           sed -i 's|D:/Programs/Python/Python38/python.exe|python3|g' pyramid/build.gradle
-          sed -i 's|https://maven.aliyun.com/repository/public|https://maven.org|g' build.gradle settings.gradle
+          sed -i 's|https://aliyun.com|https://maven.org|g' build.gradle settings.gradle
           sed -i 's|https://aliyun.com|https://google.com|g' build.gradle settings.gradle
 
       - name: Build With Gradle
